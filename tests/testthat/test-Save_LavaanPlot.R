@@ -52,3 +52,18 @@ test_that("saveLavaanPlot creates a directory if it does not exist", {
   # Clean-up
   unlink(temp_dir, recursive = TRUE)
 })
+
+
+## compatibility with other packages
+test_that("saveLavaanPlot works with valid inputs", {
+  library(lavaan)
+  model <- ' visual  =~ x1 + x2 + x3
+             textual =~ x4 + x5 + x6
+             speed   =~ x7 + x8 + x9 '
+  fit <- cfa(model, data = HolzingerSwineford1939)
+
+  temp_file <- tempfile(fileext = ".png")
+  expect_error(saveLavaanPlot(fit, temp_file), NA)
+  expect_true(file.exists(temp_file))
+})
+

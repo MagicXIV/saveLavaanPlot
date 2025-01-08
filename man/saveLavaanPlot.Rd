@@ -4,6 +4,17 @@
 \name{saveLavaanPlot}
 \alias{saveLavaanPlot}
 \title{Save Lavaan Plot}
+\usage{
+saveLavaanPlot(
+  fit,
+  filePath,
+  coefs = TRUE,
+  stand = TRUE,
+  sig = 0.05,
+  stars = "regress",
+  width = 1000
+)
+}
 \arguments{
 \item{fit}{A fitted \code{\link{lavaan::lavaan}} SEM model object (e.g., created using \code{cfa()} or \code{sem()}).}
 
@@ -15,9 +26,9 @@
 
 \item{sig}{Numeric. The significance level to display. Default is \code{0.05}.}
 
-\item{width}{Numeric. Width of the plot in pixels. Default is \code{1000}.}
-
 \item{stars}{Character. If \code{"regress"}, significant coefficients are marked with stars. Default is \code{"regress"}.}
+
+\item{width}{Numeric. Width of the plot in pixels. Default is \code{1000}.}
 }
 \value{
 A plot saved to the specified file path of the SEM model made by \code{\link{lavaan::lavaan}}.
@@ -42,7 +53,9 @@ Save_LavaanPlot(fit = SEMModel1,
                 width = 1000)
 }
 
-
+}
+\seealso{
+\link{lavaanPlot}, \link{lavaan}
 }
 \author{
 Jasmijn Bazen \email{j.l.bazen@students.uu.nl}

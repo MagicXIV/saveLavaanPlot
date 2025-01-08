@@ -5,14 +5,14 @@ library(lavaan)
 test_that("saveLavaanPlot generates a valid plot", {
   # Fit the model
   model <- ' visual  =~ x1 + x2 + x3 '
-  data <- HolzingerSwineford1939
+  data <- lavaan::HolzingerSwineford1939
   fit <- lavaan::cfa(model, data = data)
 
   # Call the function
   sem_plot <- saveLavaanPlot(fit = fit, filePath = tempfile(fileext = ".png"))
 
-  # Check if sem_plot is a DiagrammeR object
-  expect_true(inherits(sem_plot, "DiagrammeR"))
+  # Check if sem_plot is a grViz object
+  expect_true(inherits(sem_plot, "grViz"))
 
   # Optionally render the plot to ensure it's correct
   return(sem_plot)
@@ -52,11 +52,3 @@ test_that("saveLavaanPlot creates a directory if it does not exist", {
   # Clean-up
   unlink(temp_dir, recursive = TRUE)
 })
-
-
-# Check if the sem_plot is valid
-if (inherits(sem_plot, "DiagrammeR")) {
-  DiagrammeR::render_graph(sem_plot)
-} else {
-  stop("The generated plot is not valid.")
-}

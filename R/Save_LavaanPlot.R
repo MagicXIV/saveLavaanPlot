@@ -20,7 +20,6 @@
 #' @importFrom DiagrammeRsvg export_svg
 #' @importFrom rsvg rsvg_png
 #' @importFrom lavaanPlot lavaanPlot
-#' @importFrom DiagrammeR render_graph
 #'
 #' @examples
 #' \dontrun{
@@ -81,7 +80,7 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
 
   # Render the plot to the console
   cat("Rendering the plot to the console...\n")
-  DiagrammeR::render_graph(sem_plot)
+  return(sem_plot)
 
 
 }

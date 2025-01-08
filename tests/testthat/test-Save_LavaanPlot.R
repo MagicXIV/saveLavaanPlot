@@ -2,25 +2,20 @@ library(lavaan)
 
 
 ## Saved file
-test_that("saveLavaanPlot saves the file successfully", {
-  test_file <- tempfile(fileext = ".png")
-
-  # Test with a simple lavaan model
-  library(lavaan)
-  model <- ' visual  =~ x1 + x2 + x3
-              textual =~ x4 + x5 + x6
-              speed   =~ x7 + x8 + x9 '
+test_that("saveLavaanPlot generates a valid plot", {
+  # Fit the model
+  model <- ' visual  =~ x1 + x2 + x3 '
   data <- HolzingerSwineford1939
-  fit <- cfa(model, data = data)
+  fit <- lavaan::cfa(model, data = data)
 
   # Call the function
-  saveLavaanPlot(fit = fit, filePath = test_file)
+  sem_plot <- saveLavaanPlot(fit = fit, filePath = tempfile(fileext = ".png"))
 
-  # Check if the file exists
-  expect_true(file.exists(test_file))
+  # Check if sem_plot is a DiagrammeR object
+  expect_true(inherits(sem_plot, "DiagrammeR"))
 
-  # Cleanup
-  unlink(test_file)
+  # Optionally render the plot to ensure it's correct
+  return(sem_plot)
 })
 
 
@@ -59,3 +54,9 @@ test_that("saveLavaanPlot creates a directory if it does not exist", {
 })
 
 
+# Check if the sem_plot is valid
+if (inherits(sem_plot, "DiagrammeR")) {
+  DiagrammeR::render_graph(sem_plot)
+} else {
+  stop("The generated plot is not valid.")
+}

@@ -10,10 +10,10 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-Imports: 
+Imports:
     rsvg,
     lavaanPlot,
-    svglite
+    DiagrammeRsvg
 Suggests: 
     testthat (>= 3.0.0),
     lavaan

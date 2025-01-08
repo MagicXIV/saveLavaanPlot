@@ -33,10 +33,10 @@
 #' }
 #'
 # Function to fit the SEM model, generate the plot, and save it
-#'
 #' @return A saved plot of the SEM model as a PNG file.
 #'
-library(svglite)
+#' @seealso \link{lavaanPlot}, \link{lavaan}
+#'
 #'
 saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05, stars = "regress", width = 1000) {
 
@@ -64,10 +64,6 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
     stars = stars
   )
 
-  # Render the plot to the console
-  cat("Rendering the plot to the console...\n")
-  DiagrammeR::render_graph(sem_plot)
-
   # Save as .svg and convert to .png
   svg_output <- DiagrammeRsvg::export_svg(sem_plot)
   svg_file <- tempfile(fileext = ".svg")
@@ -77,4 +73,9 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
 
   # Inform user of saved file location
   cat("File saved to:", normalizePath(filePath), "\n")
+
+  # Render the plot to the console
+  cat("Rendering the plot to the console...\n")
+  base::return(sem_plot)
+
 }

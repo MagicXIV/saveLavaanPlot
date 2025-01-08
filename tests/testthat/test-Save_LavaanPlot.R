@@ -1,3 +1,6 @@
+library(lavaan)
+
+
 ## Saved file
 test_that("saveLavaanPlot saves the file successfully", {
   test_file <- tempfile(fileext = ".png")

@@ -91,5 +91,7 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
     if (file.exists(svg_file)) file.remove(svg_file)  # Clean up the temp file
   })
 
+  cat("Rendering the plot to the console...\n")
+  print(sem_plot)
   return(sem_plot)
 }

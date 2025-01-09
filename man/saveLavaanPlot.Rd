@@ -16,7 +16,7 @@ saveLavaanPlot(
 )
 }
 \arguments{
-\item{fit}{A fitted \code{\link{lavaan::lavaan}} SEM model object (e.g., created using \code{cfa()} or \code{sem()}).}
+\item{fit}{}
 
 \item{filePath}{A character string with the path to save the plot, including the file name and extension (e.g., "path/to/file.png").}
 
@@ -28,7 +28,7 @@ saveLavaanPlot(
 
 \item{stars}{Character. If \code{"regress"}, significant coefficients are marked with stars. Default is \code{"regress"}.}
 
-\item{width}{Numeric. Width of the plot in pixels. Default is \code{1000}.}
+\item{width}{}
 }
 \value{
 A plot saved to the specified file path of the SEM model made by \code{\link{lavaan::lavaan}}.

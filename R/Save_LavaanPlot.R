@@ -6,14 +6,6 @@
 #' @name saveLavaanPlot
 #' @title Save Lavaan Plot
 #' @docType package
-#' @param fit A fitted \code{\link{lavaan::lavaan}} SEM model object (e.g., created using \code{cfa()} or \code{sem()}).
-#' @param filePath A character string with the path to save the plot, including the file name and extension (e.g., "path/to/file.png").
-#' @param coefs Logical. Whether to display path coefficients. Default is \code{TRUE}.
-#' @param stand Logical. Whether to use standardized coefficients. Default is \code{TRUE}.
-#' @param sig Numeric. The significance level to display. Default is \code{0.05}.
-#' @param width Numeric. Width of the plot in pixels. Default is \code{1000}.
-#' @param stars Character. If \code{"regress"}, significant coefficients are marked with stars. Default is \code{"regress"}.
-#' @return A plot saved to the specified file path of the SEM model made by \code{\link{lavaan::lavaan}}.
 #' @author Jasmijn Bazen \email{j.l.bazen@students.uu.nl}
 #' @export
 #'
@@ -33,13 +25,21 @@
 #' }
 #'
 # Function to fit the SEM model, generate the plot, and save it
+#' @param fit A fitted \code{\link{lavaan::lavaan}} SEM model object (e.g., created using \code{cfa()} or \code{sem()}).
+#' @param filePath A character string with the path to save the plot, including the file name and extension (e.g., "path/to/file.png").
+#' @param coefs Logical. Whether to display path coefficients. Default is \code{TRUE}.
+#' @param stand Logical. Whether to use standardized coefficients. Default is \code{TRUE}.
+#' @param sig Numeric. The significance level to display. Default is \code{0.05}.
+#' @param stars Character. If \code{"regress"}, significant coefficients are marked with stars. Default is \code{"regress"}.
+#' @param width Numeric. Width of the plot in pixels. Default is \code{1000}.
+#'
 #' @return A saved plot of the SEM model as a PNG file.
 #'
 #' @seealso \link{lavaanPlot}, \link{lavaan}
 #'
 #'
 saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05,
-                           stars = "regress", width = 1000) {
+                        stars = "regress", width = 1000) {
 
   # Validate the input model
   if (!inherits(fit, "lavaan")) {
@@ -88,4 +88,3 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
   cat("Rendering the plot to the console...\n")
   return(sem_plot)
 }
-

@@ -91,7 +91,11 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
     if (file.exists(svg_file)) file.remove(svg_file)  # Clean up the temp file
   })
 
-  cat("Rendering the plot to the console...\n")
-  DiagrammeR::render_graph(sem_plot)
-  return(sem_plot)
+  tryCatch({
+    cat("Rendering the plot to the console...\n")
+    DiagrammeR::grViz(sem_plot$x$diagram)
+  }, error = function(e) {
+    cat("Error rendering the plot: ", e$message, "\n")
+  })
+
 }

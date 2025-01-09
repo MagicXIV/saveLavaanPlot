@@ -96,5 +96,11 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
 
   # Render the plot to the console
   cat("Rendering the plot to the console...\n")
-  return(sem_plot)
+  lavaanPlot::lavaanPlot(
+    model = fit,
+    coefs = coefs,
+    stand = stand,
+    sig = sig,
+    stars = stars
+  )
 }

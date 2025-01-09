@@ -39,7 +39,7 @@
 #'
 #'
 saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05,
-                        stars = "regress", width = 1000) {
+                           stars = "regress", width = 1000) {
 
   # Validate the input model
   if (!inherits(fit, "lavaan")) {
@@ -91,19 +91,17 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
     if (file.exists(svg_file)) file.remove(svg_file)  # Clean up the temp file
   })
 
-  cat("Before Rendering\n")
-
   tryCatch({
-    cat("Rendering the plot to the console...\n")
-    DiagrammeR::grViz(sem_plot$x$diagram)
+    print(lavaanPlot::lavaanPlot(
+      model = fit,
+      coefs = coefs,
+      stand = stand,
+      sig = sig,
+      stars = stars
+    ))
   }, error = function(e) {
     cat("Error rendering the plot: ", e$message, "\n")
   })
 
-  cat("after Rendering 1\n")
-
-  print(sem_plot)
-
-  cat("after Rendering 2\n")
 
 }

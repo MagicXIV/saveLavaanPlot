@@ -92,6 +92,6 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
   })
 
   cat("Rendering the plot to the console...\n")
-  print(sem_plot)
+  DiagrammeR::render_graph(sem_plot)
   return(sem_plot)
 }

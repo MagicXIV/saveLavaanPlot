@@ -58,6 +58,9 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
     }
   }
 
+  temp_dir <- tempdir()
+  Sys.setenv(DiagrammeRsvg_tempdir = temp_dir)
+
   # Generate the SEM plot
   cat("Generating SEM plot...\n")
   sem_plot <- tryCatch(
@@ -77,23 +80,19 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
   }
 
   # Save as .svg and convert to .png
-  svg_file <- tempfile(fileext = ".svg")
+  svg_file <- file.path(temp_dir, "temp_plot.svg")
   png_file <- filePath
 
-  # Try saving the SVG and converting to PNG
   tryCatch({
     svg_output <- DiagrammeRsvg::export_svg(sem_plot)
     writeLines(svg_output, svg_file)
-    rsvg::rsvg_png(svg_file, png_file)
-    cat("File saved to:", normalizePath(png_file), "\n")
+    rsvg::rsvg_png(svg_file, filePath)
+    cat("File saved to:", normalizePath(filePath), "\n")
   }, error = function(e) {
     stop("Error during SVG to PNG conversion: ", e$message)
   }, finally = {
-    # Clean up temporary SVG file
     if (file.exists(svg_file)) file.remove(svg_file)
   })
 
-  # Render the plot to the console
-  cat("Rendering the plot to the console...\n")
-  return(sem_plot)
+  print(sem_plot)
 }

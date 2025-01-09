@@ -38,7 +38,8 @@
 #' @seealso \link{lavaanPlot}, \link{lavaan}
 #'
 #'
-saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05, stars = "regress", width = 1000) {
+saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05,
+                           stars = "regress", width = 1000) {
 
   # Validate the input model
   if (!inherits(fit, "lavaan")) {

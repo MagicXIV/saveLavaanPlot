@@ -1,8 +1,7 @@
-library(lavaan)
-
-
 ## Saved file
 test_that("saveLavaanPlot generates a valid plot", {
+  library(lavaan)
+
   # Fit the model
   model <- ' visual  =~ x1 + x2 + x3 '
   data <- lavaan::HolzingerSwineford1939

@@ -79,10 +79,12 @@ saveLavaanPlot <- function(fit, filePath, coefs = TRUE, stand = TRUE, sig = 0.05
   svg_file <- tempfile(fileext = ".svg")
   writeLines(svg_output, svg_file)
 
-  rsvg::rsvg_png(svg_file, filePath)
-
-  # Inform user of saved file location
-  cat("File saved to:", normalizePath(filePath), "\n")
+  tryCatch({
+    rsvg::rsvg_png(svg_file, filePath)
+    cat("File saved to:", normalizePath(filePath), "\n")
+  }, error = function(e) {
+    stop("Error during PNG conversion: ", e$message)
+  })
 
   # Render the plot to the console
   cat("Rendering the plot to the console...\n")
